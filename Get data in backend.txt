@@ -1,0 +1,65 @@
+serevr.js
+
+//backend
+//server.js
+const express = require('express');
+const cors = require('cors');
+
+
+const app = express();
+app.use(cors());
+
+const userList = [
+
+    { id: 1, name: 'Alice', age: 30 },
+    { id: 2, name: 'Bob', age: 30 },
+    { id: 3, name: 'Charlie', age: 30, fullname: "amol" }
+];
+
+app.get('/users', (req, res) => {
+    res.json(userList);
+});
+
+
+app.listen(3000, () => console.log('Server started on port 3000'));
+
+terminal start ============== node server.js
+
+
+********************************************************************
+front end
+//app.js
+
+import "./App.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+function App() {
+  const [data, setData] = useState("");
+  
+  const getData = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/users");
+      setData(response.data);
+      console.log( "myresponce",response.data)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  
+  useEffect(() => {
+    getData();
+  }, []);
+
+  return <>
+    <div>
+    { data && data.map(user => (
+      <div key={user.id}><h1>{user.name}</h1>
+      <h1>{user.age}</h1>
+
+      </div>
+    ))}
+  </div></>;
+}
+
+export default App;
