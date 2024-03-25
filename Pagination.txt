@@ -1,0 +1,75 @@
+import { useState } from "react";
+import { Pagination } from "react-bootstrap";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+function App() {
+  // Sample data
+  const data = [
+    { id: 1, firstName: "Mark", lastName: "Otto", handle: "@mdo" },
+    { id: 2, firstName: "Jacob", lastName: "Thornton", handle: "@fat" },
+    { id: 3, firstName: "Larry", lastName: "Bird", handle: "@twitter" },
+    // Add more data here if needed
+  ];
+
+  // Number of items to display per page
+  const itemsPerPage = 2;
+
+  // State to manage current page
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Calculate index range for current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Change page
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  return (
+    <div>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentItems.map((item, index) => (
+            <tr key={index}>
+              <th scope="row">{item.id}</th>
+              <td>{item.firstName}</td>
+              <td>{item.lastName}</td>
+              <td>{item.handle}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Pagination */}
+      <div className="d-flex mx-auto">
+        <Pagination>
+          {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map(
+            (page, index) => (
+              <Pagination.Item
+                key={index}
+                active={index + 1 === currentPage}
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </Pagination.Item>
+            )
+          )}
+        </Pagination>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
