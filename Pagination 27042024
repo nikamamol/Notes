@@ -1,0 +1,90 @@
+import { useState } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+const data = [
+  { name: "Anom", age: 19, gender: "Male" },
+  { name: "Megha", age: 19, gender: "Female" },
+  { name: "Subham", age: 25, gender: "Male" },
+  { name: "John", age: 30, gender: "Male" },
+  { name: "Jane", age: 25, gender: "Female" },
+  { name: "Smith", age: 35, gender: "Male" },
+  { name: "Emma", age: 28, gender: "Female" },
+  // Add more data for pagination demonstration
+];
+
+function App() {
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const handleEntriesPerPageChange = (event) => {
+    setCurrentPage(1); 
+    setItemsPerPage(parseInt(event.target.value));
+  };
+
+  return (
+    <div className="App">
+      <div className="entries-per-page">
+        <label htmlFor="entriesPerPage">Entries per page:</label>
+        <select
+          id="entriesPerPage"
+          value={itemsPerPage}
+          onChange={handleEntriesPerPageChange}
+        >
+          <option value="3">3</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentItems.map((val, key) => {
+            return (
+              <tr key={key}>
+                <td>{val.name}</td>
+                <td>{val.age}</td>
+                <td>{val.gender}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <nav aria-label="Page navigation example">
+        <ul className="pagination justify-content-end">
+          {Array.from(
+            { length: Math.ceil(data.length / itemsPerPage) },
+            (_, i) => (
+              <li
+                key={i}
+                className={`page-item ${currentPage === i + 1 && "active"}`}
+              >
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => paginate(i + 1)}
+                >
+                  {i + 1}
+                </a>
+              </li>
+            )
+          )}
+        </ul>
+      </nav>
+    </div>
+  );
+}
+
+export default App;
