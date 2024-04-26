@@ -104,3 +104,17 @@ const MessageForm = () => {
 };
 
 export default MessageForm;
+
+
+
+
+
+ {posts.map((post, index) => (
+          <>
+            <div className="row mb-3" key={index}>
+              <div className="col bg-primary">{post.title}</div>
+              <div className="col bg-secondary">{post.userId}</div>
+              <div className="col bg-secondary">{post.tags}</div>
+            </div>
+          </>
+        ))}
