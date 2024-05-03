@@ -81,3 +81,96 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+import React, { useState, useEffect } from "react";
+import "./styles.css";
+
+export default function App() {
+  const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10); // Number of posts per page
+
+  useEffect(() => {
+    fetch("https://dummyjson.com/posts")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch posts");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data && Array.isArray(data.posts)) {
+          setPosts(data.posts);
+        } else {
+          throw new Error("Invalid data format");
+        }
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
+
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  return (
+    <div className="App">
+      <h1>Hello CodeSandbox</h1>
+      <h2>Start editing to see some magic happen!</h2>
+      <div>
+        <h2>Posts</h2>
+        {currentPosts.map((post, index) => (
+          <div className="row mb-3 bg-secondary text-light" key={index}>
+            <div className="col">{post.title}</div>
+            <div className="col">{post.userId}</div>
+            <div className="col">{post.tags}</div>
+          </div>
+        ))}
+        {/* Pagination */}
+        <ul className="pagination">
+          {currentPage > 1 && (
+            <li className="page-item">
+              <button
+                onClick={() => paginate(currentPage - 1)}
+                className="page-link"
+              >
+                Previous
+              </button>
+            </li>
+          )}
+          {[1, 2].map((pageNumber) => (
+            <li key={pageNumber} className="page-item">
+              <button
+                onClick={() => paginate(pageNumber)}
+                className={`page-link ${
+                  currentPage === pageNumber && "active"
+                }`}
+              >
+                {pageNumber}
+              </button>
+            </li>
+          ))}
+          {currentPage < Math.ceil(posts.length / postsPerPage) && (
+            <li className="page-item">
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                className="page-link"
+              >
+                Next
+              </button>
+            </li>
+          )}
+        </ul>
+      </div>
+    </div>
+  );
+}
