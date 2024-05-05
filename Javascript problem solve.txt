@@ -1,0 +1,189 @@
+//reverse string
+// function reverseString(str) {
+//     let reverseStr = ""
+//     for (let i = str.length - 1; i >= 0; i--) {
+//         reverseStr += str[i]
+//     }
+//     return reverseStr
+// }
+// console.log(reverseString("amol"))
+
+// function reverseString(str) {
+//     return str.split('').reverse().join('')
+// }
+// console.log(reverseString("Hello amol patil"))
+
+//find the longest word in a string
+// function findLongestWord(str) {
+//     let word = str.split(" ")
+//     let longestWord = ""
+//     for (let words of word) {
+//         if (words.length > longestWord.length) {
+//             longestWord = words
+//         }
+//     }
+//     return longestWord
+// }
+
+// console.log(findLongestWord("hello amol sambhaji patil"));
+
+//check isPalidrom or not
+// function isPalidrom(str) {
+//     let reverse = str.split("").reverse().join("")
+//     return str === reverse
+// }
+
+// console.log(isPalidrom("nayan")) //true
+
+//remove dublicate in an array
+// function removeDublicate(arr) {
+//     let unicArr = [];
+//     for (let i = 0; i < arr.length; i++) {
+//         if (unicArr.indexOf(arr[i]) === -1) {
+//             unicArr.push(arr[i]);
+//         }
+//     }
+//     return unicArr;
+// }
+
+// console.log(removeDublicate([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 2])); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+// function removeDublicate(arr) {
+//     return [...new Set(arr)]
+// }
+// console.log(removeDublicate([1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5]))
+
+//check anagram
+// function checkAnagram(str1, str2) {
+//   let arr1 = str1.split("").sort().join("");
+//   let arr2 = str2.split("").sort().join("");
+
+//   return arr1 === arr2;
+// }
+// console.log(checkAnagram("nayan", "anayn"));
+
+// //count the  vowels
+// function countVowel(str) {
+//     let vowels = ["a", "e", "i", "o", "u"];
+//     let count = 0;
+//     for (let chat of str.toLowerCase()) {
+//         if (vowels.includes(chat)) {
+//             count++
+//         }
+//     }
+//     return count
+// }
+// console.log(countVowel("nayan"))
+
+//find largest elemment in array
+
+// function findLargest(arr) {
+//     let largets = arr[0]
+//     for (let i = 1; i < arr.length; i++) {
+//         if (arr[i] > largets) {
+//             largets = arr[i]
+//         }
+//     }
+//     return largets
+// }
+
+// console.log(findLargest([1, 2, 3, 4, 5, 6, 78]))
+
+//check is prime
+
+// function checkIsPrime(number) {
+//     for (let i = 2; i <= number / 2; i++) {
+//         if (number % 2 === 0) {
+//             return false;
+//         }
+//     }
+//     return true;
+// }
+// console.log(checkIsPrime(5))
+
+//calculate factorial
+
+// function calculateFactorial(num) {
+//     if (num === 0) {
+//         return 0;
+//     }
+//     let factorial = 1;
+//     for (let i = 1; i <= num; i++) {
+//         factorial *= i;
+//     }
+//     return factorial
+// }
+// console.log(calculateFactorial(5));
+
+//remove whitespace
+
+// function removeWhiteSpace(str) {
+//     return str.replace(/\s/g, "")
+// }
+// console.log(removeWhiteSpace("hello   amol"))
+
+// find dublicate in given aray
+
+// const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5];
+// const removeDublicate = arr.filter((item, index, arr1) => {
+//     console.log(item)
+//     console.log(index)
+//     return arr1.indexOf(item) !== index
+// })
+// console.log(removeDublicate)
+
+// how to find max and min valu in given array in js
+
+// const arrNumber = [1, 9, 7, 25, 3, 5, 4, 5, 5, 6, 5];
+// const maxNumber = function(arr) {
+//     return arr.reduce((a, b) => {
+//         //height value
+//         return a > b ? a : b;
+//         // lovest value
+//         // return a < b ? a : b
+//     });
+// };
+// console.log(maxNumber(arrNumber));
+
+//how to find second largest number in given array
+
+const intArr = [1, 2, 3, 4, 5, 6, 47, 8, 9];
+
+// console.log(secondLargest(intArr));
+// const largestValu = (arr) => {
+//     const firstLargestValue = Math.max(...arr);
+//     index = arr.indexOf(firstLargestValue);
+//     arr.splice(index, 1);
+//     const secondLargest = Math.max(...arr);
+//     return secondLargest;
+// };
+// console.log(largestValu(intArr));
+
+//how to find missing number in a given integer array of 1 to 10
+
+// find min or max value first
+// const findMissingValue = (arr) => {
+//     const minValue = Math.min(...arr);
+//     const maxValue = Math.max(...arr);
+//     const missingValue = [];
+//     for (let i = minValue; i < maxValue; i++) {
+//         if (!arr.includes(i)) {
+//             missingValue.push(i);
+//         }
+//     }
+//     return missingValue;
+// };
+// console.log(findMissingValue([1, 2, 3, 4, 6, 7, 10]));
+
+// const findMissingValue = (arr) => {
+//     let minvalu = Math.min(...arr);
+//     let maxvalu = Math.max(...arr);
+//     let missingvalu = [];
+//     for (let i = minvalu; i < maxvalu; i++) {
+//         if (arr.indexOf(i) < 0) {
+//             missingvalu.push(i)
+//         }
+//     }
+//     return missingvalu;
+// }
+// console.log(findMissingValue([1, 2, 3, 4, 6, 7, 10]));
