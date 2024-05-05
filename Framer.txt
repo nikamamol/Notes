@@ -1,0 +1,67 @@
+// import { motion } from "framer-motion";
+
+// function RightAndLeft() {
+//   return (
+//     <>
+//     <motion.h1
+//       initial={{ x: -100 }}
+//       animate={{ x: 0 }}
+//       transition={{ duration: 2 ,delay: 1 }}
+//     >
+//       It is h1 for animation framer motion
+//     </motion.h1>
+//       <motion.h1
+//       initial={{ x: -100 }}
+//       animate={{ x: [900,0]}}
+//       transition={{ duration: 2 ,delay: 1 }}
+//     >
+//       It is h1 for animation framer motion
+//     </motion.h1>
+//     </>
+//   );
+// }
+
+// export default RightAndLeft;
+
+
+*********************************************************************
+
+
+import { motion } from "framer-motion";
+
+function RightAndLeft() {
+  return (
+    <>
+    <motion.h1
+      initial={{ x: -100 }}
+      animate={{ x: 0 }}
+      transition={{ duration: 2 ,delay: 1 }}
+    >
+      It is h1 for animation framer motion
+    </motion.h1>
+      <motion.h1
+      initial={{ x: -100 }}
+    //   animate={{ x: [0,900,0]}}
+    animate={{ x: [900,0]}}
+    transition={{ duration: 2 ,delay: 1 }}
+    whileHover={{ scale:"0.9" ,opacity:"0.9" ,rotate:360 ,borderRadius:"100px" }}
+    
+
+    >
+      It is h1 for animation framer motion
+    </motion.h1>
+    </>
+  );
+}
+
+export default RightAndLeft;
+
+
+********************************************************
+
+
+
+
+
+
+
