@@ -1,0 +1,219 @@
+import { useEffect } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import ApexCharts from "apexcharts";
+
+function Graph() {
+  useEffect(() => {
+    var options1 = {
+      series: [
+        {
+          name: "Session Duration",
+          data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10],
+        },
+        {
+          name: "Page Views",
+          data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35],
+        },
+        {
+          name: "Total Visits",
+          data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47],
+        },
+      ],
+      chart: {
+        height: 350,
+        type: "line",
+        zoom: {
+          enabled: false,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        width: [5, 7, 5],
+        curve: "straight",
+        dashArray: [0, 8, 5],
+      },
+      title: {
+        text: "Page Statistics",
+        align: "left",
+      },
+      legend: {
+        tooltipHoverFormatter: function(val, opts) {
+          return (
+            val +
+            " - <strong>" +
+            opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
+            "</strong>"
+          );
+        },
+      },
+      markers: {
+        size: 0,
+        hover: {
+          sizeOffset: 6,
+        },
+      },
+      xaxis: {
+        categories: [
+          "01 Jan",
+          "02 Jan",
+          "03 Jan",
+          "04 Jan",
+          "05 Jan",
+          "06 Jan",
+          "07 Jan",
+          "08 Jan",
+          "09 Jan",
+          "10 Jan",
+          "11 Jan",
+          "12 Jan",
+        ],
+      },
+      tooltip: {
+        y: [
+          {
+            title: {
+              formatter: function(val) {
+                return val + " (mins)";
+              },
+            },
+          },
+          {
+            title: {
+              formatter: function(val) {
+                return val + " per session";
+              },
+            },
+          },
+          {
+            title: {
+              formatter: function(val) {
+                return val;
+              },
+            },
+          },
+        ],
+      },
+      grid: {
+        borderColor: "#f1f1f1",
+      },
+    };
+
+    var chart1 = new ApexCharts(document.querySelector("#chart"), options1);
+    chart1.render();
+
+    var options2 = {
+      series: [44, 55, 41, 17, 15],
+      chart: {
+        width: 380,
+        type: "donut",
+      },
+      plotOptions: {
+        pie: {
+          startAngle: -90,
+          endAngle: 270,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      fill: {
+        type: "gradient",
+      },
+      legend: {
+        formatter: function(val, opts) {
+          return val + " - " + opts.w.globals.series[opts.seriesIndex];
+        },
+      },
+      title: {
+        text: "Gradient Donut with custom Start-angle",
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: "bottom",
+            },
+          },
+        },
+      ],
+    };
+
+    var chart2 = new ApexCharts(document.querySelector("#chart1"), options2);
+    chart2.render();
+
+    // Cleanup functions
+    return () => {
+      chart1.destroy();
+      chart2.destroy();
+    };
+  }, []); // Empty dependency array to run this effect only once
+
+  return (
+    <>
+      <Container>
+        <Row className="mt-5">
+          <Col>
+            <div id="chart"></div>
+          </Col>
+          <Col>
+            <div id="chart1"></div>
+          </Col>
+        </Row>
+      </Container>
+      <Container>
+        <Row className="mt-5">
+          <Col>
+            <div id="">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Praesentium sequi odio neque minima aliquid libero ipsum dicta at,
+              laudantium, sed distinctio? Quaerat commodi cum ab animi rem
+              blanditiis temporibus quis cupiditate provident fuga officia
+              saepe, ut minus expedita numquam minima dignissimos eligendi hic
+              nulla aliquam error impedit doloribus cumque! Pariatur amet, n
+              quia ipsum maxime. Quas molestiae nihil sit, odio quos cupiditate
+              eveniet asperiores doloremque eius omnis, fuga tempora dicta
+              error? Molestiae architecto, possimus autem provident velit dolor
+              quis non eligendi! Quibusdam modi officia rem suscipit nisi quasi
+              exercitationem nulla sequi distinctio quam! Qui velit ea atque
+              dolor quisquam aliquid! Animi maiores possimus in excepturi
+              excepturi recusandae? Numquam maiores sint vitae nostrum culpa
+              fugit velit debitis voluptas, aperiam obcaecati dicta accusamus
+              facilis placeat provident quod officiis? Cum nisi odit rem,
+              repellat fugit sunt animi. Numquam, consectetur fugiat perferendis
+              sint voluptatibus beatae saepe provident, excepturi dignissimos ea
+              maiores, eos debitis harum delectus nobis ullam voluptatem? Nulla
+              repudiandae, earum optio eveniet tenetur illo esse inventore
+              blanditiis omnis sint minima, officia eaque. Officiis consectetur
+              officia libero similique ad provident porro excepturi. Magni,
+              numquam voluptatum!
+            </div>
+          </Col>
+          <Col>
+            <div id="">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia
+              assumenda repellat quos iusto aliquam. Mollitia autem vitae quam
+              illum ipsum harum? Ratione iste maiores neque corrupti. Placeat
+              iure veritatis molestias cum iste expedita similique nostrum
+              magnam corrupti ad, quidem tenetur maxime! Vel voluptatibus amet
+              blanditiis alias a, nemo vitae nihil? Est perspiciatis velit eius.
+              Eligendi aperiam numquam consectetur omnis quo placeat illo culpa
+              eveniet iusto. Unde quos debitis ipsam, consectetur hic et
+              laudantium aspernatur repudiandae amet mollitia pariatur iusto
+              voluptatum voluptas temporibus sapiente dicta vitae incidunt,
+              saepe sit corrupti tenetur totam alias facilis. Asperiores eveniet
+              dolorem quam molestias est quisquam?
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
+}
+
+export default Graph;
